@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/cavaleiro-ai/cavaleiro-model-framework/security/advisories/new
+    about: Please report vulnerabilities privately, never in a public issue.
+  - name: Read the contributing guide
+    url: https://github.com/cavaleiro-ai/cavaleiro-model-framework/blob/main/CONTRIBUTING.md
+    about: How to set up the environment, run the targeted tests, and send a pull request.
+  - name: Model checkpoints on the Hugging Face Hub
+    url: https://huggingface.co/models
+    about: Problems with a specific checkpoint belong in that model's Discussions on the Hub.

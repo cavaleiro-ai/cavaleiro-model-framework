@@ -1,0 +1,8 @@
+- sections:
+  - local: index
+    title: Cavaleiro Model Framework
+  - local: installation
+    title: Kurulum
+  - local: quicktour
+    title: Hızlı Başlangıç
+  title: Başlarken

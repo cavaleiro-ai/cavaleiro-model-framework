@@ -1,0 +1,30 @@
+Cavaleiro Model Framework
+Copyright 2026 Cavaleiro AI (modifications in Cavaleiro Model Framework)
+
+Cavaleiro Model Framework — a derivative work by Cavaleiro AI (2026), modified from Transformers (https://github.com/huggingface/transformers).
+
+This product includes software developed by The Hugging Face team as part of
+Transformers (https://github.com/huggingface/transformers):
+
+    Copyright 2018- The Hugging Face team. All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not
+    use this software except in compliance with the License. A copy of the
+    License is included in the LICENSE file of this distribution and is also
+    available at http://www.apache.org/licenses/LICENSE-2.0
+
+The upstream source files keep their original copyright and license headers.
+Source files changed by Cavaleiro AI carry a "Modified by Cavaleiro AI (2026): ..."
+notice below their license header, as required by Section 4(b) of the License.
+The list of changes is in CHANGELOG.md and docs/cavaleiro/ENGINEERING.md.
+
+Upstream was taken at commit d4804f9d76b8c071b993d813e9e87067b780cbee
+(huggingface/transformers, branch main, 2026-10-17).
+
+"Hugging Face" and "Transformers" are trademarks of their respective owner.
+The Apache License, Version 2.0 does not grant permission to use them
+(Section 6). They are used here only to describe the origin of this work.
+Cavaleiro Model Framework is not affiliated with or endorsed by Hugging Face.
+
+Third-party components bundled by upstream keep their own license files and
+notices in the locations where upstream ships them.

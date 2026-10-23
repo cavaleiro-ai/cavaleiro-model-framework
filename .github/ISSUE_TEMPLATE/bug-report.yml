@@ -1,0 +1,77 @@
+name: "Bug report"
+description: Something in Cavaleiro Model Framework (the `transformers` package from this repository) does not behave as documented.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Please **do not** paste secrets, Hub tokens, private URLs, or proprietary data.
+        Security issues must be reported privately — see [SECURITY.md](https://github.com/cavaleiro-ai/cavaleiro-model-framework/blob/main/SECURITY.md).
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the library is affected?
+      options:
+        - Model loading / saving (from_pretrained, save_pretrained, push_to_hub)
+        - Configuration (PreTrainedConfig, GenerationConfig)
+        - Tokenizers / processors
+        - Generation (generate, logits processors, streamers)
+        - Pipelines
+        - Trainer / training arguments
+        - CLI (transformers env / chat / serve / download)
+        - A specific model architecture
+        - Windows-specific behavior
+        - Documentation / README
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System info
+      description: Run `transformers env` and paste its output. Add the Cavaleiro Model Framework commit or release you use.
+      placeholder: transformers version, platform, Python version, PyTorch version, ...
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: upstream
+    attributes:
+      label: Does it also happen with the `transformers` release on PyPI?
+      options:
+        - "Yes, the PyPI transformers release has the same problem"
+        - "No, only Cavaleiro Model Framework"
+        - "I did not check"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: |
+        A minimal, self-contained code sample that reproduces the problem, with the full error and stack trace.
+        Prefer tiny models (for example `hf-internal-testing/tiny-random-*`) or a config built in code. Use code blocks, not screenshots.
+      placeholder: |
+        from transformers import ...
+
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen instead.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: I removed secrets, tokens, and private data from this report.
+          required: true

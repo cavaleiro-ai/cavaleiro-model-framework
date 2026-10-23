@@ -1,0 +1,45 @@
+name: "Improvement or feature"
+description: Suggest an improvement to Cavaleiro Model Framework (robustness, Windows support, developer experience, docs).
+title: "[Improvement]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Good proposals describe a **real problem** first, then the smallest change that solves it.
+        New model architectures and documentation translations are out of scope for this repository.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is wrong, hard, or risky today? Who hits it, and when? Link related issues if any.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The smallest change that would solve it. Name the files or APIs you expect to touch.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches, including "do nothing", and why they are worse.
+  - type: textarea
+    id: verification
+    attributes:
+      label: How would we verify it?
+      description: The test, command, or observable behavior that proves the change works.
+    validations:
+      required: true
+  - type: checkboxes
+    id: compatibility
+    attributes:
+      label: Compatibility
+      description: Cavaleiro Model Framework stays a drop-in replacement for `transformers`.
+      options:
+        - label: The proposal keeps the `transformers` package name, import paths, public APIs, and file formats unchanged (or explains the break).
+          required: true
+        - label: I am willing to help with a pull request.

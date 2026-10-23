@@ -1,0 +1,71 @@
+# Cavaleiro Model Framework CI: lint plus a targeted CPU test subset, on GitHub-hosted runners only.
+# It needs nothing but a read-only GITHUB_TOKEN. Upstream's GPU, publishing, and bot workflows
+# are kept in .github/workflows-disabled/ (see the README there).
+name: Cavaleiro CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  PYTHONUTF8: "1"
+
+jobs:
+  lint:
+    name: Ruff (lint and format)
+    permissions:
+      contents: read
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Install ruff (same version as setup.py)
+        run: pip install "ruff==0.14.10"
+      - name: Ruff check (same targets as utils/checkers.py)
+        run: ruff check examples tests src utils scripts .circleci/create_circleci_config.py benchmark benchmark_v2 setup.py conftest.py
+      - name: Ruff format
+        run: ruff format --check examples tests src utils scripts .circleci/create_circleci_config.py benchmark benchmark_v2 setup.py conftest.py
+
+  tests:
+    name: Core tests (CPU)
+    permissions:
+      contents: read
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Install CPU-only PyTorch and the testing extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[testing,torch,vision,sentencepiece,tiktoken,chat_template]"
+      - name: Run the tests for the modules Cavaleiro Model Framework changed
+        run: |
+          python -m pytest -n 2 --dist=loadfile -q -rfE --timeout=900 \
+            tests/utils/test_hub_utils.py \
+            tests/utils/test_hf_argparser.py \
+            tests/utils/test_configuration_utils.py \
+            tests/utils/test_generic.py \
+            tests/generation/test_logits_process.py \
+            tests/generation/test_configuration_utils.py \
+            tests/pipelines/test_pipelines_common.py \
+            tests/models/auto/test_video_processing_auto.py \
+            "tests/generation/test_utils.py::GenerationEncoderInputIdsTest"
